@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Apache API"/>
+	<classpathentry kind="lib" path="E:/Thomas/Génie Logiciel/Apache POI/poi-3.10.1-20140818.jar"/>
+	<classpathentry kind="lib" path="E:/Thomas/Génie Logiciel/Apache POI/poi-ooxml-3.10.1-20140818.jar"/>
+	<classpathentry kind="lib" path="E:/Thomas/Génie Logiciel/Apache POI/poi-excelant-3.10.1-20140818.jar"/>
+	<classpathentry kind="lib" path="E:/Thomas/Génie Logiciel/Apache POI/poi-ooxml-schemas-3.10.1-20140818.jar"/>
+	<classpathentry kind="lib" path="E:/Thomas/Génie Logiciel/Apache POI/poi-scratchpad-3.10.1-20140818.jar"/>
+	<classpathentry kind="lib" path="E:/Thomas/Génie Logiciel/Apache POI/poi-examples-3.10.1-20140818.jar"/>
+	<classpathentry kind="lib" path="E:/Thomas/Génie Logiciel/Apache POI/ooxml-lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="E:/Thomas/Génie Logiciel/Apache POI/ooxml-lib/stax-api-1.0.1.jar"/>
+	<classpathentry kind="lib" path="E:/Thomas/Génie Logiciel/Apache POI/ooxml-lib/xmlbeans-2.6.0.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
