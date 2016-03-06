@@ -1,0 +1,16 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+version = '0.2.1' 
+
+repositories
+{
+    mavenCentral()
+}
+
+dependencies
+{
+   compile  'log4j:log4j:1.2.16'
+   compile 'de.twentyeleven.skysail:org.apache.poi-osgi:3.8'
+   
+   testCompile 'junit:junit:4.12'
+} 
