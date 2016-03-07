@@ -1,24 +1,29 @@
 package listeur.gui;
 
-import java.util.ArrayList ;
+import java.nio.file.Path ;
+import java.nio.file.Paths ;
 import java.util.Arrays ;
 import java.util.ResourceBundle ;
 
+import javafx.beans.value.ChangeListener ;
+import javafx.beans.value.ObservableValue ;
 import javafx.collections.FXCollections ;
-import javafx.collections.ObservableList ;
 import javafx.fxml.FXML ;
 import javafx.scene.control.Accordion ;
 import javafx.scene.control.Button ;
 import javafx.scene.control.ListView ;
 import javafx.scene.control.TitledPane ;
+import listeur.core.Source ;
 
 public class MainWindowCtrlr
 {
 	@FXML private ResourceBundle resources;
     @FXML private Accordion instructions;
     @FXML private TitledPane paths;
-    @FXML private ListView<String> pathsList;
-    @FXML private Button actionPath;
+    @FXML private ListView<Source> pathsList;
+    @FXML private Button newPathButton;
+    @FXML private Button editPathButton;
+    @FXML private Button deletePathButton;
     @FXML private TitledPane filters;
     @FXML private ListView<String> showList;
     @FXML private Button actionShow;
@@ -37,8 +42,6 @@ public class MainWindowCtrlr
 	{
 		instructions.setExpandedPane( paths );
 		
-		actionPath.setText( resources.getString( "Add" ) );
-		
 		Arrays.asList( actionShow, actionExclude, actionSaveAs, actionRenderRules ).stream()
 		.forEach( e ->
 		{
@@ -46,7 +49,27 @@ public class MainWindowCtrlr
 			e.setDisable( false );
 		});
 		
-		pathsList.setItems( FXCollections.observableArrayList("C:\\","D:\\") );
+		Source[] defaultPaths=new Source[2];
+		defaultPaths[0]=new Source(Paths.get("C:\\"));
+		defaultPaths[1]=new Source(Paths.get("D:\\"));
+		
+		pathsList.setItems( FXCollections.observableArrayList(defaultPaths) );
+		pathsList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Source>()
+		{
+			public void changed(ObservableValue<? extends Source> observable, Source oldValue, Source newValue)
+			{
+				if(newValue==null)
+				{
+					editPathButton.setDisable( true );
+					deletePathButton.setDisable( true );
+				}
+				else
+				{
+					editPathButton.setDisable( false );
+					deletePathButton.setDisable( false );
+				}
+			}
+		});
 		
 		showList.setItems( FXCollections.observableArrayList("Files","Empty Files","Folders","Empty Folders") );
 		
