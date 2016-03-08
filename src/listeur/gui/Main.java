@@ -1,7 +1,6 @@
 package listeur.gui;
 
 import java.io.IOException ;
-import java.net.URL ;
 import java.util.Locale ;
 import java.util.PropertyResourceBundle ;
 
@@ -10,7 +9,8 @@ import javafx.fxml.FXMLLoader ;
 import javafx.scene.Scene ;
 import javafx.scene.layout.BorderPane ;
 import javafx.stage.Stage ;
-import locales.Locales ;
+import listeur.gui.mainwindow.MainWindowCtrlr ;
+import listeur.locales.Locales ;
 
 public class Main extends Application
 {
@@ -27,10 +27,11 @@ public class Main extends Application
 			primaryStage.setTitle( "Listeur 0.2.1" );
 			
 			Locale locale=new Locale("en","US");
-			FXMLLoader loader=new FXMLLoader(
-					new URL("file:///DDData/Thomas/Génie Logiciel/IDEs/Eclipse/Listeur/bin/listeur/gui/MainWindow.fxml"),
-					new PropertyResourceBundle( Locales.class.getResource( "MainWindow.locale.en_US.properties" ).openStream())
-							);
+			
+			FXMLLoader loader = new FXMLLoader(
+					MainWindowCtrlr.class.getResource( "MainWindow.fxml" ),
+					new PropertyResourceBundle( Locales.class.getResource( "fr_FR.properties" ).openStream())
+							) ;
 			
 			BorderPane root=(BorderPane)loader.load();
 			MainWindowCtrlr controller=loader.getController();
@@ -39,7 +40,7 @@ public class Main extends Application
 			primaryStage.setScene( scene );
 			primaryStage.show();
 		}
-		catch(IOException e)
+		catch(Exception e)
 		{
 			e.printStackTrace();
 		}

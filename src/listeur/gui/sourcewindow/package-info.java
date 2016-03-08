@@ -5,4 +5,4 @@
  * @author Jimskapt
  *
  */
-package listeur.core ;
+package listeur.gui.sourcewindow ;

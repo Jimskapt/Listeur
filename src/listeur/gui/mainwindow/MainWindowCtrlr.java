@@ -1,6 +1,5 @@
-package listeur.gui;
+package listeur.gui.mainwindow;
 
-import java.nio.file.Path ;
 import java.nio.file.Paths ;
 import java.util.Arrays ;
 import java.util.ResourceBundle ;
@@ -34,12 +33,30 @@ public class MainWindowCtrlr
     @FXML private Button actionSaveAs;
     @FXML private ListView<String> renderRulesList;
     @FXML private Button actionRenderRules;
-    @FXML private Button launchScan;	
+    @FXML private Button launchScan;
     
 	public MainWindowCtrlr() {}
 	
 	@FXML void initialize()
 	{
+		assert instructions != null : "fx:id=\"instructions\" was not injected: check your FXML file 'MainWindow.fxml'.";
+        assert paths != null : "fx:id=\"paths\" was not injected: check your FXML file 'MainWindow.fxml'.";
+        assert pathsList != null : "fx:id=\"pathsList\" was not injected: check your FXML file 'MainWindow.fxml'.";
+        assert newPathButton != null : "fx:id=\"newPathButton\" was not injected: check your FXML file 'MainWindow.fxml'.";
+        assert editPathButton != null : "fx:id=\"editPathButton\" was not injected: check your FXML file 'MainWindow.fxml'.";
+        assert deletePathButton != null : "fx:id=\"deletePathButton\" was not injected: check your FXML file 'MainWindow.fxml'.";
+        assert filters != null : "fx:id=\"filters\" was not injected: check your FXML file 'MainWindow.fxml'.";
+        assert showList != null : "fx:id=\"showList\" was not injected: check your FXML file 'MainWindow.fxml'.";
+        assert actionShow != null : "fx:id=\"actionShow\" was not injected: check your FXML file 'MainWindow.fxml'.";
+        assert excludeList != null : "fx:id=\"excludeList\" was not injected: check your FXML file 'MainWindow.fxml'.";
+        assert actionExclude != null : "fx:id=\"actionExclude\" was not injected: check your FXML file 'MainWindow.fxml'.";
+        assert resultSettings != null : "fx:id=\"resultSettings\" was not injected: check your FXML file 'MainWindow.fxml'.";
+        assert saveAsList != null : "fx:id=\"saveAsList\" was not injected: check your FXML file 'MainWindow.fxml'.";
+        assert actionSaveAs != null : "fx:id=\"actionSaveAs\" was not injected: check your FXML file 'MainWindow.fxml'.";
+        assert renderRulesList != null : "fx:id=\"renderRulesList\" was not injected: check your FXML file 'MainWindow.fxml'.";
+        assert actionRenderRules != null : "fx:id=\"actionRenderRules\" was not injected: check your FXML file 'MainWindow.fxml'.";
+        assert launchScan != null : "fx:id=\"launchScan\" was not injected: check your FXML file 'MainWindow.fxml'.";
+		
 		instructions.setExpandedPane( paths );
 		
 		Arrays.asList( actionShow, actionExclude, actionSaveAs, actionRenderRules ).stream()

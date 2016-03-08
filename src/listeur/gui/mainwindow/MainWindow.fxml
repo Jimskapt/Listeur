@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.76-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="listeur.gui.MainWindowCtrlr">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.76-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="listeur.gui.mainwindow.MainWindowCtrlr">
    <center>
       <Accordion fx:id="instructions" BorderPane.alignment="CENTER">
         <panes>
@@ -21,7 +21,7 @@
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <ListView fx:id="pathsList" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                        <ListView fx:id="pathsList" BorderPane.alignment="CENTER">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></ListView>
