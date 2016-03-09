@@ -31,7 +31,7 @@ public class Main extends Application
 			FXMLLoader loader = new FXMLLoader(
 					MainWindowCtrlr.class.getResource( "MainWindow.fxml" ),
 					new PropertyResourceBundle( Locales.class.getResource( "en_US.properties" ).openStream())
-							) ;
+			);
 			
 			BorderPane root=(BorderPane)loader.load();
 			MainWindowCtrlr controller=loader.getController();

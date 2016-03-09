@@ -1,12 +1,9 @@
 package listeur.gui.mainwindow;
 
-import java.awt.Desktop ;
-import java.io.IOException ;
-import java.net.URI ;
-import java.net.URISyntaxException ;
 import java.nio.file.Paths ;
 import java.util.Arrays ;
 import java.util.Optional ;
+import java.util.PropertyResourceBundle ;
 import java.util.ResourceBundle ;
 
 import javafx.beans.value.ChangeListener ;
@@ -14,16 +11,22 @@ import javafx.beans.value.ObservableValue ;
 import javafx.collections.FXCollections ;
 import javafx.event.ActionEvent ;
 import javafx.fxml.FXML ;
+import javafx.fxml.FXMLLoader ;
+import javafx.scene.Node ;
+import javafx.scene.Scene ;
 import javafx.scene.control.Accordion ;
 import javafx.scene.control.Alert ;
 import javafx.scene.control.Alert.AlertType ;
 import javafx.scene.control.Button ;
-import javafx.scene.control.ButtonBar.ButtonData ;
 import javafx.scene.control.ButtonType ;
 import javafx.scene.control.ListView ;
 import javafx.scene.control.TitledPane ;
+import javafx.scene.layout.BorderPane ;
+import javafx.stage.Modality ;
 import javafx.stage.Stage ;
 import listeur.core.Source ;
+import listeur.gui.sourcewindow.SourceWindow ;
+import listeur.locales.Locales ;
 
 public class MainWindowCtrlr
 {
@@ -111,7 +114,7 @@ public class MainWindowCtrlr
 	
 	@FXML void closeWindow(ActionEvent event)
 	{
-		((Stage)instructions.getScene().getWindow()).close();
+		((Stage)((Button)(event.getSource())).getScene().getWindow()).close();
     }
 	
 	@FXML void showHelp(ActionEvent event)
@@ -123,4 +126,31 @@ public class MainWindowCtrlr
 		
 		Optional<ButtonType> result=alert.showAndWait();
     }
+	
+	@FXML void newPathEvent(ActionEvent event)
+	{
+		try
+		{
+			Stage stage = new Stage();
+			stage.setTitle( "Create a new path" );
+			
+			stage.initModality( Modality.APPLICATION_MODAL );
+			stage.initOwner( ((Node)event.getSource()).getScene().getWindow() );
+			
+			FXMLLoader loader = new FXMLLoader(
+					SourceWindow.class.getResource( "SourceWindow.fxml" ),
+					new PropertyResourceBundle( Locales.class.getResource( "en_US.properties" ).openStream())
+			);
+			
+			BorderPane root=(BorderPane)loader.load();
+			
+			stage.setScene(new Scene(root));
+			
+			stage.show();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
 }
