@@ -17,7 +17,7 @@ public class Source
 	public String toString()
 	{
 		if( path!=null )
-			return path.toString();
+			return "Local directory : "+path.toString();
 		else
 			return "Unknown Source";
 	}
