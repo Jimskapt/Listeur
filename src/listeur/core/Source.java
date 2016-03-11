@@ -11,13 +11,18 @@ public class Source
 	
 	public Source(Path path)
 	{
+		this.setPath(path);
+	}
+	
+	public void setPath(Path path)
+	{
 		this.path=path;
 	}
 	
 	public String toString()
 	{
 		if( path!=null )
-			return "Local directory : "+path.toString();
+			return path.toString();
 		else
 			return "Unknown Source";
 	}

@@ -127,4 +127,12 @@ public class MainWindowCtrlr
 	{
 		new SourceWindow( ((Node)event.getSource()).getScene().getWindow() ); 
 	}
+	
+	@FXML void editPathEvent(ActionEvent event)
+	{
+		new SourceWindow(
+				((Node)event.getSource()).getScene().getWindow(),
+				((ListView<Source>)((Node)event.getSource()).getScene().lookup( "#pathsList") ).getSelectionModel().getSelectedItem()
+		); 
+	}
 }

@@ -8,10 +8,13 @@ import javafx.scene.layout.BorderPane ;
 import javafx.stage.Modality ;
 import javafx.stage.Stage ;
 import javafx.stage.Window ;
+import listeur.core.Source ;
 import listeur.locales.Locales ;
 
 public class SourceWindow
 {
+	protected SourceWindowCtrl ctrl;
+	
 	public SourceWindow( Window parent )
 	{
 		try
@@ -29,7 +32,8 @@ public class SourceWindow
 			
 			BorderPane root=(BorderPane)loader.load();
 			
-			((SourceWindowCtrl)loader.getController()).setParentWindow( parent );
+			this.ctrl=(SourceWindowCtrl)loader.getController();
+			ctrl.setParentWindow( parent );
 			
 			stage.setScene(new Scene(root));
 			
@@ -39,5 +43,12 @@ public class SourceWindow
 		{
 			e.printStackTrace();
 		}
+	}
+	
+	public SourceWindow( Window parent, Source target )
+	{
+		this( parent );
+		
+		ctrl.setTarget(target);
 	}
 }

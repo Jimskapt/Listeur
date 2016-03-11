@@ -2,6 +2,7 @@ package listeur.gui.sourcewindow;
 
 import java.io.File ;
 import java.net.URL;
+import java.nio.file.Path ;
 import java.nio.file.Paths ;
 import java.util.ResourceBundle;
 
@@ -19,6 +20,7 @@ import listeur.core.Source ;
 public class SourceWindowCtrl
 {
 	protected Window parent;
+	protected Source target;
 	
     @FXML private ResourceBundle resources;
     @FXML private URL location;
@@ -27,7 +29,8 @@ public class SourceWindowCtrl
 
     @FXML void initialize()
     {
-    	
+    	if( target!=null )
+    		localPathSelected.setText( target.toString() );
     }
     
     @FXML void browseLocalEvent(ActionEvent event)
@@ -51,7 +54,15 @@ public class SourceWindowCtrl
     
     @FXML void okEvent(ActionEvent event)
     {
-    	((ListView)parent.getScene().lookup( "#pathsList" )).getItems().add( new Source(Paths.get( localPathSelected.getText() )));
+    	Path value=Paths.get( localPathSelected.getText() );
+    	
+    	if( this.target==null )
+    		((ListView<Source>)parent.getScene().lookup( "#pathsList" )).getItems().add( new Source(value) );
+    	else
+    	{
+    		this.target.setPath( value );
+    		((ListView<Source>)parent.getScene().lookup( "#pathsList" )).refresh();
+    	}
     	
     	this.closeWindow( event );
     }
@@ -69,5 +80,11 @@ public class SourceWindowCtrl
     public void setParentWindow(Window parent)
     {
     	this.parent=parent;
+    }
+    public void setTarget(Source target)
+    {
+    	this.target=target;
+    	
+    	localPathSelected.setText( target.toString() );
     }
 }
