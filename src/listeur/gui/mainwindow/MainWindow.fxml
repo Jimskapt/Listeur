@@ -35,7 +35,7 @@
                                  </HBox.margin>
                               </Button>
                             <Button fx:id="editPathButton" disable="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#editPathEvent" text="%Edit" HBox.hgrow="ALWAYS" />
-                              <Button fx:id="deletePathButton" disable="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="%Delete" HBox.hgrow="ALWAYS" />
+                              <Button fx:id="deletePathButton" disable="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#deletePathEvent" text="%Delete" HBox.hgrow="ALWAYS" />
                            </children>
                            <BorderPane.margin>
                               <Insets top="10.0" />

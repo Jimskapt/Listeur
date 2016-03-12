@@ -15,12 +15,14 @@ import javafx.scene.control.Accordion ;
 import javafx.scene.control.Alert ;
 import javafx.scene.control.Alert.AlertType ;
 import javafx.scene.control.Button ;
+import javafx.scene.control.ButtonBar.ButtonData ;
 import javafx.scene.control.ButtonType ;
 import javafx.scene.control.ListView ;
 import javafx.scene.control.MenuItem ;
 import javafx.scene.control.TitledPane ;
 import javafx.stage.Stage ;
 import listeur.core.Source ;
+import listeur.gui.Main ;
 import listeur.gui.sourcewindow.SourceWindow ;
 
 public class MainWindowCtrlr
@@ -134,5 +136,33 @@ public class MainWindowCtrlr
 				((Node)event.getSource()).getScene().getWindow(),
 				((ListView<Source>)((Node)event.getSource()).getScene().lookup( "#pathsList") ).getSelectionModel().getSelectedItem()
 		); 
+	}
+	
+	@FXML void deletePathEvent(ActionEvent event)
+	{
+		Source target=((ListView<Source>)((Node)event.getSource()).getScene().lookup( "#pathsList") ).getSelectionModel().getSelectedItem();
+		
+		boolean delete=false;
+		if( Main.setup.showConfirmDialogDeletePath )
+		{
+			Alert dialog=new Alert( AlertType.CONFIRMATION );
+			dialog.setTitle( "Confirm deleting" );
+			dialog.setHeaderText( "Deleting "+target.toString()+" ?" );
+			dialog.setContentText( resources.getString( "confirmDeleteText" ) );
+			
+			ButtonType yes=new ButtonType( resources.getString( "Yes" ) );
+			ButtonType no=new ButtonType( resources.getString( "No" ), ButtonData.CANCEL_CLOSE );
+			
+			dialog.getButtonTypes().setAll( no, yes );
+			
+			Optional<ButtonType> choice=dialog.showAndWait();
+			if(choice.get()==yes)
+				delete=true;
+		}
+		
+		if( delete )
+		{
+			((ListView<Source>)((Node)event.getSource()).getScene().lookup( "#pathsList") ).getItems().remove( target );
+		}
 	}
 }

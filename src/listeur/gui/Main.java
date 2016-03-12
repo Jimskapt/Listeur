@@ -1,6 +1,5 @@
 package listeur.gui;
 
-import java.io.IOException ;
 import java.util.Locale ;
 import java.util.PropertyResourceBundle ;
 
@@ -9,11 +8,15 @@ import javafx.fxml.FXMLLoader ;
 import javafx.scene.Scene ;
 import javafx.scene.layout.BorderPane ;
 import javafx.stage.Stage ;
+import listeur.core.Setup ;
 import listeur.gui.mainwindow.MainWindowCtrlr ;
 import listeur.locales.Locales ;
 
 public class Main extends Application
 {
+	public static Setup setup=new Setup();
+	public static Locale locale=new Locale("en","US");
+	
 	public Main()
 	{
 		
@@ -26,15 +29,12 @@ public class Main extends Application
 		{
 			primaryStage.setTitle( "Listeur 0.2.1" );
 			
-			Locale locale=new Locale("en","US");
-			
 			FXMLLoader loader = new FXMLLoader(
 					MainWindowCtrlr.class.getResource( "MainWindow.fxml" ),
-					new PropertyResourceBundle( Locales.class.getResource( "en_US.properties" ).openStream())
+					new PropertyResourceBundle( Locales.class.getResource( locale.getLanguage()+"_"+locale.getCountry()+".properties" ).openStream())
 			);
 			
 			BorderPane root=(BorderPane)loader.load();
-			MainWindowCtrlr controller=loader.getController();
 			
 			Scene scene=new Scene( root );
 			primaryStage.setScene( scene );
@@ -48,6 +48,6 @@ public class Main extends Application
 	
 	public static void main( String[] args )
 	{
-		launch( args );
+		launch(args);
 	}
 }
