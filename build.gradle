@@ -1,16 +1,65 @@
+buildscript
+{
+	repositories
+	{
+		 jcenter()
+	}
+
+	dependencies
+	{
+		classpath 'org.javafxports:jfxmobile-plugin:1.0.7'
+	}
+}
+
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'org.javafxports.jfxmobile'
+
 version = '0.2.1' 
+mainClassName='listeur.core.Main'
+
+sourceSets
+{
+	main
+	{
+		java
+		{
+			srcDir 'src'
+		}
+		resources
+		{
+			srcDir 'src'
+		}
+	}
+}
 
 repositories
 {
-    mavenCentral()
+	 jcenter()
 }
 
 dependencies
 {
-   compile  'log4j:log4j:1.2.16'
-   compile 'de.twentyeleven.skysail:org.apache.poi-osgi:3.8'
-   
-   testCompile 'junit:junit:4.12'
-} 
+
+}
+
+jfxmobile
+{
+	android
+	{
+		//compileSdkVersion "21"
+		buildToolsVersion "23.0.2"
+		
+		applicationPackage='listeur.core.Main'
+		// don't forget to set ANDROID_HOME ! (export ANDROID_HOME=/path/to/android-sdk-linux/)
+		
+		sourceSets
+		{
+			main
+			{
+				java.srcDirs = ['src']
+	            resources.srcDirs = ['src']
+			}
+		}
+	}
+}
