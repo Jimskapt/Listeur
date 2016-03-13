@@ -1,4 +1,4 @@
-package listeur.gui.sourcewindow;
+package listeur.gui.settingswindow;
 
 import java.util.PropertyResourceBundle ;
 
@@ -9,31 +9,30 @@ import javafx.stage.Modality ;
 import javafx.stage.Stage ;
 import javafx.stage.Window ;
 import listeur.core.Main ;
-import listeur.core.Source ;
 import listeur.locales.Locales ;
 
-public class SourceWindow
+public class SettingsWindow
 {
-	protected SourceWindowCtrl ctrl;
+	protected SettingsWindowCtrl ctrl;
 	
-	public SourceWindow( Window parent )
+	public SettingsWindow( Window parent )
 	{
 		try
 		{
 			Stage stage = new Stage();
-			stage.setTitle( "Create a new path" );
+			stage.setTitle( "Settings" );
 			
 			stage.initModality( Modality.APPLICATION_MODAL );
 			stage.initOwner( parent );
 			
 			FXMLLoader loader = new FXMLLoader(
-					this.getClass().getResource( "SourceWindow.fxml" ),
+					this.getClass().getResource( "SettingsWindow.fxml" ),
 					new PropertyResourceBundle( Locales.class.getResource( Main.locale.getLanguage()+"_"+Main.locale.getCountry()+".properties" ).openStream())
 			);
 			
 			BorderPane root=(BorderPane)loader.load();
 			
-			this.ctrl=(SourceWindowCtrl)loader.getController();
+			this.ctrl=(SettingsWindowCtrl)loader.getController();
 			ctrl.setParentWindow( parent );
 			
 			stage.setScene(new Scene(root));
@@ -44,12 +43,5 @@ public class SourceWindow
 		{
 			e.printStackTrace();
 		}
-	}
-	
-	public SourceWindow( Window parent, Source target )
-	{
-		this( parent );
-		
-		ctrl.setTarget(target);
 	}
 }

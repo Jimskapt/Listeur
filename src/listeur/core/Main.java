@@ -1,4 +1,4 @@
-package listeur.gui;
+package listeur.core;
 
 import java.util.Locale ;
 import java.util.PropertyResourceBundle ;
@@ -8,13 +8,12 @@ import javafx.fxml.FXMLLoader ;
 import javafx.scene.Scene ;
 import javafx.scene.layout.BorderPane ;
 import javafx.stage.Stage ;
-import listeur.core.Setup ;
 import listeur.gui.mainwindow.MainWindowCtrlr ;
 import listeur.locales.Locales ;
 
 public class Main extends Application
 {
-	public static Setup setup=new Setup();
+	public static Settings settings=new Settings();
 	public static Locale locale=new Locale("en","US");
 	
 	public Main()

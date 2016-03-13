@@ -1,10 +1,10 @@
 package listeur.core;
 
-public class Setup
+public class Settings
 {
 	public static boolean showConfirmDialogDeletePath=true;
 	
-	public Setup()
+	public Settings()
 	{
 		showConfirmDialogDeletePath=true;
 	}

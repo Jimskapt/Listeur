@@ -5,6 +5,7 @@ import java.util.Arrays ;
 import java.util.Optional ;
 import java.util.ResourceBundle ;
 
+import javafx.application.Platform ;
 import javafx.beans.value.ChangeListener ;
 import javafx.beans.value.ObservableValue ;
 import javafx.collections.FXCollections ;
@@ -21,8 +22,9 @@ import javafx.scene.control.ListView ;
 import javafx.scene.control.MenuItem ;
 import javafx.scene.control.TitledPane ;
 import javafx.stage.Stage ;
+import listeur.core.Main ;
 import listeur.core.Source ;
-import listeur.gui.Main ;
+import listeur.gui.settingswindow.SettingsWindow ;
 import listeur.gui.sourcewindow.SourceWindow ;
 
 public class MainWindowCtrlr
@@ -112,7 +114,7 @@ public class MainWindowCtrlr
 	@FXML void closeWindow(ActionEvent event)
 	{
 		// TODO : fix it !
-		((Stage)((MenuItem)(event.getSource())).getGraphic().getScene().getWindow()).close();
+		Platform.exit();
     }
 	
 	@FXML void showHelp(ActionEvent event)
@@ -138,12 +140,17 @@ public class MainWindowCtrlr
 		); 
 	}
 	
+	@FXML void askSettingsWindow(ActionEvent event)
+	{
+		new SettingsWindow( ((MenuItem)event.getSource()).getParentPopup().getScene().getWindow() );
+	}
+	
 	@FXML void deletePathEvent(ActionEvent event)
 	{
 		Source target=((ListView<Source>)((Node)event.getSource()).getScene().lookup( "#pathsList") ).getSelectionModel().getSelectedItem();
 		
 		boolean delete=false;
-		if( Main.setup.showConfirmDialogDeletePath )
+		if( Main.settings.showConfirmDialogDeletePath )
 		{
 			Alert dialog=new Alert( AlertType.CONFIRMATION );
 			dialog.setTitle( "Confirm deleting" );
