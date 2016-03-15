@@ -2,6 +2,7 @@ package listeur.gui.mainwindow;
 
 import java.nio.file.Paths ;
 import java.util.Arrays ;
+import java.util.Locale ;
 import java.util.Optional ;
 import java.util.ResourceBundle ;
 
@@ -21,7 +22,6 @@ import javafx.scene.control.ButtonType ;
 import javafx.scene.control.ListView ;
 import javafx.scene.control.MenuItem ;
 import javafx.scene.control.TitledPane ;
-import javafx.stage.Stage ;
 import listeur.core.Main ;
 import listeur.core.Source ;
 import listeur.gui.settingswindow.SettingsWindow ;

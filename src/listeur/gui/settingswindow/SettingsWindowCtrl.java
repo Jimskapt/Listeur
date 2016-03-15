@@ -5,10 +5,13 @@ import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent ;
 import javafx.fxml.FXML;
+import javafx.scene.Node ;
 import javafx.scene.control.CheckBox ;
 import javafx.scene.control.ComboBox ;
+import javafx.stage.Stage ;
 import javafx.stage.Window ;
 import listeur.core.Main ;
+import listeur.core.Settings ;
 
 public class SettingsWindowCtrl
 {
@@ -33,9 +36,12 @@ public class SettingsWindowCtrl
 		assert alwaysSaveResultSettings != null : "fx:id=\"alwaysSaveResultSettings\" was not injected: check your FXML file 'SettingsWindow.fxml'.";
 		
 		selectedLanguage.getItems().addAll( "en", "fr" );
-		
 		selectedLanguage.getSelectionModel().clearSelection();
 		selectedLanguage.getSelectionModel().select( Main.locale.getLanguage() );
+		
+		selectedCountry.getItems().addAll( Main.locale.getCountry() );
+		selectedCountry.getSelectionModel().clearSelection();
+		selectedCountry.getSelectionModel().select( Main.locale.getCountry() );
 		
 		/*
 		// TO DO later ...
@@ -76,8 +82,43 @@ public class SettingsWindowCtrl
 			selectedCountry.getSelectionModel().select( 0 );
 	}
 	
+	@FXML void okEvent(ActionEvent event)
+	{
+		Settings.showConfirmDialogDeletePath=showConfigDeletePath.isSelected();
+		Settings.alwaysSavePaths=alwaysSavePaths.isSelected();
+		Settings.alwaysSaveFilters=alwaysSaveFilters.isSelected();
+		Settings.alwaysSaveResultSettings=alwaysSaveResultSettings.isSelected();
+		
+		Settings.selectedLanguage=selectedLanguage.getValue();
+		Settings.selectedCountry=selectedCountry.getValue();
+		
+		Main.settings.saveFile();
+		
+		this.closeWindow( event );
+	}
+	
+	@FXML void cancelEvent(ActionEvent event)
+	{
+		this.closeWindow( event );
+	}
+	
+	private void closeWindow(ActionEvent event)
+    {
+    	this.closeWindow( (Node)(event.getSource()) );
+    }
+    
+    private void closeWindow(Node source)
+    {
+    	((Stage)source.getScene().getWindow()).close();
+    }
+	
 	public void setParentWindow( Window parent )
 	{
 		this.parent=parent;
+		
+		showConfigDeletePath.setSelected( Main.settings.showConfirmDialogDeletePath );
+		alwaysSavePaths.setSelected( Main.settings.alwaysSavePaths );
+		alwaysSaveFilters.setSelected( Main.settings.alwaysSaveFilters );
+		alwaysSaveResultSettings.setSelected( Main.settings.alwaysSaveResultSettings );
 	}
 }
