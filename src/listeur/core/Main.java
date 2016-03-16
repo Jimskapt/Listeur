@@ -14,7 +14,7 @@ import listeur.locales.Locales ;
 public class Main extends Application
 {
 	public static Settings settings=new Settings();
-	public static Locale locale=new Locale("en","US");
+	public static Locale locale;
 	
 	public Main()
 	{
