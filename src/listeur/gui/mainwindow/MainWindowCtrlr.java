@@ -149,7 +149,7 @@ public class MainWindowCtrlr
 	{
 		Source target=((ListView<Source>)((Node)event.getSource()).getScene().lookup( "#pathsList") ).getSelectionModel().getSelectedItem();
 		
-		boolean delete=false;
+		boolean delete=true;
 		if( Main.settings.showConfirmDialogDeletePath )
 		{
 			Alert dialog=new Alert( AlertType.CONFIRMATION );
@@ -163,8 +163,8 @@ public class MainWindowCtrlr
 			dialog.getButtonTypes().setAll( no, yes );
 			
 			Optional<ButtonType> choice=dialog.showAndWait();
-			if(choice.get()==yes)
-				delete=true;
+			if(choice.get()!=yes)
+				delete=false;
 		}
 		
 		if( delete )
