@@ -10,6 +10,9 @@ import java.nio.file.Paths ;
 import java.util.Locale ;
 import java.util.Properties ;
 
+import javafx.stage.Window ;
+import listeur.gui.exceptionWindow.ExceptionWindow ;
+
 public class Settings
 {
 	public static String selectedLanguage, selectedCountry;
@@ -49,32 +52,28 @@ public class Settings
 			selectedLanguage="en";
 			selectedCountry="US";
 			
+			// TODO
+			e.printStackTrace();
+		}
+		catch( URISyntaxException e )
+		{
+			// TODO
 			e.printStackTrace();
 		}
 	}
 	
-	public File getSaveFile()
+	public File getSaveFile() throws URISyntaxException
 	{
-		try
-		{
-			return 
-				Paths.get(
-					FileSystems.getDefault().getPath(
-						Paths.get( this.getClass().getProtectionDomain().getCodeSource().getLocation().toURI() ).toString(),
-						"listeur.settings"
-					).toUri()
-				).toFile();
-		}
-		catch( URISyntaxException e )
-		{
-			// TODO : warning, quick but dirty code, we have to improve it !
-			//e.printStackTrace();
-			
-			return null;
-		}
+		return 
+			Paths.get(
+				FileSystems.getDefault().getPath(
+					Paths.get( this.getClass().getProtectionDomain().getCodeSource().getLocation().toURI() ).toString(),
+					"listeur.settings"
+				).toUri()
+			).toFile();
 	}
 	
-	public void saveFile()
+	public void saveFile(Window window)
 	{
 		Properties settings=new Properties();
 		settings.put( "showConfirmDialogDeletePath", (showConfirmDialogDeletePath) ? "true" : "false" );
@@ -97,7 +96,17 @@ public class Settings
 		}
 		catch( IOException e )
 		{
-			//e.printStackTrace();
+			if( Main.executingMode=="GUI" )
+				new ExceptionWindow( window, "We can not save settings in the file.", e );
+			else
+				e.printStackTrace();
+		}
+		catch( URISyntaxException e )
+		{
+			if( Main.executingMode=="GUI" )
+				new ExceptionWindow( window, "The path to the saving file is wrong.\nYour settings are not saved.", e );
+			else
+				e.printStackTrace();
 		}
 		
 		Main.locale=new Locale( selectedLanguage, selectedCountry );

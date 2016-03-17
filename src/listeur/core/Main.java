@@ -13,6 +13,7 @@ import listeur.locales.Locales ;
 
 public class Main extends Application
 {
+	public static String executingMode="GUI"; // GUI or CLI
 	public static Settings settings=new Settings();
 	public static Locale locale;
 	

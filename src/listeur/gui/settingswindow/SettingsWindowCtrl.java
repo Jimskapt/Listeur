@@ -92,7 +92,7 @@ public class SettingsWindowCtrl
 		Settings.selectedLanguage=selectedLanguage.getValue();
 		Settings.selectedCountry=selectedCountry.getValue();
 		
-		Main.settings.saveFile();
+		Main.settings.saveFile( ((Node)(event.getSource())).getScene().getWindow() );
 		
 		this.closeWindow( event );
 	}

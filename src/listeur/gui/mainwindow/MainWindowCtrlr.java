@@ -113,7 +113,6 @@ public class MainWindowCtrlr
 	
 	@FXML void closeWindow(ActionEvent event)
 	{
-		// TODO : fix it !
 		Platform.exit();
     }
 	
