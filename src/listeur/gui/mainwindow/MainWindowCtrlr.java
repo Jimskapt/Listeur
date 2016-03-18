@@ -2,7 +2,6 @@ package listeur.gui.mainwindow;
 
 import java.nio.file.Paths ;
 import java.util.Arrays ;
-import java.util.Locale ;
 import java.util.Optional ;
 import java.util.ResourceBundle ;
 
@@ -19,9 +18,12 @@ import javafx.scene.control.Alert.AlertType ;
 import javafx.scene.control.Button ;
 import javafx.scene.control.ButtonBar.ButtonData ;
 import javafx.scene.control.ButtonType ;
+import javafx.scene.control.Hyperlink ;
+import javafx.scene.control.Label ;
 import javafx.scene.control.ListView ;
 import javafx.scene.control.MenuItem ;
 import javafx.scene.control.TitledPane ;
+import javafx.scene.layout.FlowPane ;
 import listeur.core.Main ;
 import listeur.core.Source ;
 import listeur.gui.settingswindow.SettingsWindow ;
@@ -119,11 +121,11 @@ public class MainWindowCtrlr
 	@FXML void showHelp(ActionEvent event)
 	{
 		Alert alert=new Alert(AlertType.INFORMATION);
-		alert.setTitle( "About Listeur ..." );
-		alert.setHeaderText( "Listeur is a free software under MIT licence.");
-		alert.setContentText( "Visit us on our GitHub !\n\nhttps://github.com/Jimskapt/Listeur" );
+		alert.setTitle( resources.getString( "aboutListeurTitle" ) );
+		alert.setHeaderText( resources.getString( "aboutListeurHeader" ) );
+		alert.setContentText( resources.getString( "aboutListeurText" ).concat( "\nhttps://github.com/Jimskapt/Listeur" ) );
 		
-		Optional<ButtonType> result=alert.showAndWait();
+		alert.showAndWait();
     }
 	
 	@FXML void newPathEvent(ActionEvent event)
