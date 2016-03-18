@@ -1,5 +1,9 @@
 package listeur.gui.mainwindow;
 
+import java.awt.Desktop ;
+import java.awt.Toolkit ;
+import java.awt.datatransfer.StringSelection ;
+import java.net.URI ;
 import java.nio.file.Paths ;
 import java.util.Arrays ;
 import java.util.Optional ;
@@ -23,7 +27,7 @@ import javafx.scene.control.Label ;
 import javafx.scene.control.ListView ;
 import javafx.scene.control.MenuItem ;
 import javafx.scene.control.TitledPane ;
-import javafx.scene.layout.FlowPane ;
+import javafx.scene.layout.VBox ;
 import listeur.core.Main ;
 import listeur.core.Source ;
 import listeur.gui.settingswindow.SettingsWindow ;
@@ -123,7 +127,37 @@ public class MainWindowCtrlr
 		Alert alert=new Alert(AlertType.INFORMATION);
 		alert.setTitle( resources.getString( "aboutListeurTitle" ) );
 		alert.setHeaderText( resources.getString( "aboutListeurHeader" ) );
-		alert.setContentText( resources.getString( "aboutListeurText" ).concat( "\nhttps://github.com/Jimskapt/Listeur" ) );
+		
+		String website="https://github.com/Jimskapt/Listeur";
+		Hyperlink hl=new Hyperlink( website );
+		hl.setOnAction( e ->
+		{
+			if( Desktop.isDesktopSupported() )
+			{
+				try
+				{
+					Desktop.getDesktop().browse( new URI(website) );
+				}
+				catch(Exception e2)
+				{
+					StringSelection url=new StringSelection(website);
+					Toolkit.getDefaultToolkit().getSystemClipboard().setContents( url, url );
+					
+					Alert a=new Alert( AlertType.INFORMATION );
+					a.setHeaderText( "Unable to open your web-browser." );
+					a.setContentText( "The URL's website was copied to your clipboard." );
+					a.showAndWait();
+				}
+			}
+		});
+		
+		VBox vb=new VBox();
+		vb.getChildren().addAll(
+			new Label( resources.getString( "aboutListeurText" ) ),
+			hl
+		);
+		
+		alert.getDialogPane().contentProperty().set( vb );
 		
 		alert.showAndWait();
     }
