@@ -1,5 +1,7 @@
 package listeur.gui.settingswindow;
 
+import java.io.IOException ;
+import java.net.URISyntaxException ;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -12,6 +14,7 @@ import javafx.stage.Stage ;
 import javafx.stage.Window ;
 import listeur.core.Main ;
 import listeur.core.Settings ;
+import listeur.gui.exceptionWindow.ExceptionWindow ;
 
 public class SettingsWindowCtrl
 {
@@ -92,9 +95,26 @@ public class SettingsWindowCtrl
 		Settings.selectedLanguage=selectedLanguage.getValue();
 		Settings.selectedCountry=selectedCountry.getValue();
 		
-		Main.settings.saveFile( ((Node)(event.getSource())).getScene().getWindow() );
-		
-		this.closeWindow( event );
+		try
+		{
+			Main.settings.saveFile();
+			
+			this.closeWindow( event );
+		}
+		catch( IOException e )
+		{
+			new ExceptionWindow( 	((Node)event.getSource()).getScene().getWindow(),
+									resources.getString( "canNotSaveSettingsFile" ).concat( "\n" ).concat(resources.getString( "settingsNotSaved" )),
+									e
+								);
+		}
+		catch( URISyntaxException e )
+		{
+			new ExceptionWindow( 	((Node)event.getSource()).getScene().getWindow(),
+									resources.getString( "pathToSettingsFileWrong" ).concat( "\n" ).concat(resources.getString( "settingsNotSaved" )),
+									e
+								);
+		}
 	}
 	
 	@FXML void cancelEvent(ActionEvent event)

@@ -73,7 +73,7 @@ public class Settings
 			).toFile();
 	}
 	
-	public void saveFile(Window window)
+	public void saveFile() throws IOException, URISyntaxException
 	{
 		Properties settings=new Properties();
 		settings.put( "showConfirmDialogDeletePath", (showConfirmDialogDeletePath) ? "true" : "false" );
@@ -96,17 +96,11 @@ public class Settings
 		}
 		catch( IOException e )
 		{
-			if( Main.executingMode=="GUI" )
-				new ExceptionWindow( window, "We can not save settings in the file.", e );
-			else
-				e.printStackTrace();
+			throw e;
 		}
 		catch( URISyntaxException e )
 		{
-			if( Main.executingMode=="GUI" )
-				new ExceptionWindow( window, "The path to the saving file is wrong.\nYour settings are not saved.", e );
-			else
-				e.printStackTrace();
+			throw e;
 		}
 		
 		Main.locale=new Locale( selectedLanguage, selectedCountry );
