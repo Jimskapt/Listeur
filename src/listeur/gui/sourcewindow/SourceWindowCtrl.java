@@ -53,19 +53,21 @@ public class SourceWindowCtrl extends CustomModalWindowCtrl
     
     @FXML void okEvent(ActionEvent event)
     {
-    	String selectedPath=localPathSelected.getText().trim();
+    	Path value=Paths.get( localPathSelected.getText().trim() );
     	
-    	Path value=Paths.get( selectedPath );
-    	
-    	if( this.target==null )
-    		((ListView<Source>)parent.getScene().lookup( "#pathsList" )).getItems().add( new Source(value) );
-    	else
+    	if( new File( value.toUri() ).exists() )
     	{
-    		this.target.setPath( value );
-    		((ListView<Source>)parent.getScene().lookup( "#pathsList" )).refresh();
+	    	if( this.target==null )
+	    		((ListView<Source>)parent.getScene().lookup( "#pathsList" )).getItems().add( new Source(value) );
+	    	else
+	    	{
+	    		this.target.setPath( value );
+	    		((ListView<Source>)parent.getScene().lookup( "#pathsList" )).refresh();
+	    	}
+	    	
+	    	this.closeWindow( event );
     	}
-    	
-    	this.closeWindow( event );
+    	// TODO else show error alert window
     }
     
     private void closeWindow(ActionEvent event)
