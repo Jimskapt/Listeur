@@ -14,8 +14,9 @@ import javafx.scene.input.MouseEvent ;
 import javafx.scene.text.Text ;
 import javafx.stage.Stage ;
 import javafx.stage.Window ;
+import listeur.gui.tools.CustomModalWindowCtrl ;
 
-public class ExceptionWindowCtrl
+public class ExceptionWindowCtrl extends CustomModalWindowCtrl
 {
 	protected Window parent;
 	
@@ -35,7 +36,9 @@ public class ExceptionWindowCtrl
 		assert ok != null : "fx:id=\"ok\" was not injected: check your FXML file 'ExceptionWindow.fxml'.";
 		assert description != null : "fx:id=\"description\" was not injected: check your FXML file 'ExceptionWindow.fxml'.";
 		assert exceptionTrace != null : "fx:id=\"exceptionTrace\" was not injected: check your FXML file 'ExceptionWindow.fxml'.";
-
+		
+		this.setDescription( "" );
+		this.setException( new Exception("") );
 	}
 	
 	@FXML void refreshWindowSize(MouseEvent event)
@@ -52,11 +55,6 @@ public class ExceptionWindowCtrl
     {
     	((Stage)source.getScene().getWindow()).close();
     }
-	
-	public void setParentWindow( Window parent )
-	{
-		this.parent=parent;
-	}
 	
 	public void setDescription( String description )
 	{

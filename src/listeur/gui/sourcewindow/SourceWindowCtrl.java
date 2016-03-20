@@ -14,12 +14,11 @@ import javafx.scene.control.TextField ;
 import javafx.scene.control.TreeView ;
 import javafx.stage.DirectoryChooser ;
 import javafx.stage.Stage ;
-import javafx.stage.Window ;
 import listeur.core.Source ;
+import listeur.gui.tools.CustomModalWindowCtrl ;
 
-public class SourceWindowCtrl
+public class SourceWindowCtrl extends CustomModalWindowCtrl
 {
-	protected Window parent;
 	protected Source target;
 	
     @FXML private ResourceBundle resources;
@@ -54,7 +53,9 @@ public class SourceWindowCtrl
     
     @FXML void okEvent(ActionEvent event)
     {
-    	Path value=Paths.get( localPathSelected.getText() );
+    	String selectedPath=localPathSelected.getText().trim();
+    	
+    	Path value=Paths.get( selectedPath );
     	
     	if( this.target==null )
     		((ListView<Source>)parent.getScene().lookup( "#pathsList" )).getItems().add( new Source(value) );
@@ -77,10 +78,6 @@ public class SourceWindowCtrl
     	((Stage)source.getScene().getWindow()).close();
     }
     
-    public void setParentWindow(Window parent)
-    {
-    	this.parent=parent;
-    }
     public void setTarget(Source target)
     {
     	this.target=target;

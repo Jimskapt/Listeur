@@ -1,55 +1,21 @@
 package listeur.gui.sourcewindow;
 
-import java.util.PropertyResourceBundle ;
-
-import javafx.fxml.FXMLLoader ;
-import javafx.scene.Scene ;
-import javafx.scene.layout.BorderPane ;
-import javafx.stage.Modality ;
-import javafx.stage.Stage ;
 import javafx.stage.Window ;
-import listeur.core.Main ;
 import listeur.core.Source ;
-import listeur.locales.Locales ;
+import listeur.gui.tools.CustomModalWindow ;
 
-public class SourceWindow
+public class SourceWindow extends CustomModalWindow
 {
-	protected SourceWindowCtrl ctrl;
-	
 	public SourceWindow( Window parent )
 	{
-		try
-		{
-			Stage stage = new Stage();
-			stage.setTitle( "Create a new path" );
-			
-			stage.initModality( Modality.APPLICATION_MODAL );
-			stage.initOwner( parent );
-			
-			FXMLLoader loader = new FXMLLoader(
-					this.getClass().getResource( "SourceWindow.fxml" ),
-					new PropertyResourceBundle( Locales.class.getResource( Main.locale.getLanguage()+"_"+Main.locale.getCountry()+".properties" ).openStream())
-			);
-			
-			BorderPane root=(BorderPane)loader.load();
-			
-			this.ctrl=(SourceWindowCtrl)loader.getController();
-			ctrl.setParentWindow( parent );
-			
-			stage.setScene(new Scene(root));
-			
-			stage.show();
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
+		this( parent, null );
 	}
 	
 	public SourceWindow( Window parent, Source target )
 	{
-		this( parent );
+		super( parent, "Source" );
 		
-		ctrl.setTarget(target);
+		if( target!=null )
+			((SourceWindowCtrl)ctrl).setTarget(target);
 	}
 }

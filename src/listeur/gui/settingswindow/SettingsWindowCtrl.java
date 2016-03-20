@@ -15,8 +15,9 @@ import javafx.stage.Window ;
 import listeur.core.Main ;
 import listeur.core.Settings ;
 import listeur.gui.exceptionWindow.ExceptionWindow ;
+import listeur.gui.tools.CustomModalWindowCtrl ;
 
-public class SettingsWindowCtrl
+public class SettingsWindowCtrl extends CustomModalWindowCtrl
 {
 	protected Window parent;
 	
@@ -132,9 +133,10 @@ public class SettingsWindowCtrl
     	((Stage)source.getScene().getWindow()).close();
     }
 	
+    @Override
 	public void setParentWindow( Window parent )
 	{
-		this.parent=parent;
+		super.setParentWindow(parent);
 		
 		showConfigDeletePath.setSelected( Main.settings.showConfirmDialogDeletePath );
 		alwaysSavePaths.setSelected( Main.settings.alwaysSavePaths );
