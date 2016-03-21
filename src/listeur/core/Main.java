@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader ;
 import javafx.scene.Scene ;
 import javafx.scene.layout.BorderPane ;
 import javafx.stage.Stage ;
+import listeur.gui.filterwindow.FilterWindow ;
 import listeur.gui.mainwindow.MainWindowCtrlr ;
 import listeur.locales.Locales ;
 
@@ -38,6 +39,8 @@ public class Main extends Application
 			Scene scene=new Scene( root );
 			primaryStage.setScene( scene );
 			primaryStage.show();
+			
+			new FilterWindow( primaryStage.getOwner() );
 		}
 		catch(Exception e)
 		{

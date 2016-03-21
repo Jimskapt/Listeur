@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+
+
+<BorderPane xmlns="http://javafx.com/javafx/8.0.76-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="listeur.gui.filterwindow.FilterWindowCtrl">
+   <center>
+      <TitledPane collapsible="false" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" text="%applyOn" BorderPane.alignment="CENTER">
+         <content>
+            <TabPane side="BOTTOM" tabClosingPolicy="UNAVAILABLE">
+               <tabs>
+                  <Tab closable="false" text="%Graphical">
+                     <content>
+                        <GridPane fx:id="gridElements" alignment="CENTER" hgap="10.0" vgap="10.0">
+                           <columnConstraints>
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints valignment="BASELINE" vgrow="NEVER" />
+                           </rowConstraints>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </GridPane>
+                     </content>
+                  </Tab>
+                  <Tab closable="false" text="%Query">
+                     <content>
+                        <TextArea fx:id="queryCode" promptText="Query" />
+                     </content>
+                  </Tab>
+               </tabs>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </TabPane>
+         </content>
+         <graphic>
+            <HBox alignment="CENTER" spacing="10.0">
+               <children>
+                  <ChoiceBox fx:id="typeTarget" />
+                  <ButtonBar HBox.hgrow="ALWAYS">
+                    <buttons>
+                      <Button defaultButton="true" mnemonicParsing="false" text="%OK" />
+                        <Button cancelButton="true" mnemonicParsing="false" text="%Cancel" />
+                    </buttons>
+                  </ButtonBar>
+               </children>
+            </HBox>
+         </graphic>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </TitledPane>
+   </center>
+</BorderPane>
