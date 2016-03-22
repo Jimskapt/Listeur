@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -14,16 +13,15 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
 <BorderPane xmlns="http://javafx.com/javafx/8.0.76-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="listeur.gui.filterwindow.FilterWindowCtrl">
    <center>
       <TitledPane collapsible="false" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" text="%applyOn" BorderPane.alignment="CENTER">
          <content>
             <TabPane side="BOTTOM" tabClosingPolicy="UNAVAILABLE">
                <tabs>
-                  <Tab closable="false" text="%Graphical">
+                  <Tab closable="false" text="%Wizard">
                      <content>
-                        <GridPane fx:id="gridElements" alignment="CENTER" hgap="10.0" vgap="10.0">
+                        <GridPane fx:id="gridElements" alignment="CENTER" hgap="10.0" maxHeight="1.7976931348623157E308" vgap="10.0">
                            <columnConstraints>
                               <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
                               <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
@@ -52,15 +50,11 @@
             </TabPane>
          </content>
          <graphic>
-            <HBox alignment="CENTER" spacing="10.0">
+            <HBox alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" spacing="10.0">
                <children>
                   <ChoiceBox fx:id="typeTarget" />
-                  <ButtonBar HBox.hgrow="ALWAYS">
-                    <buttons>
-                      <Button defaultButton="true" mnemonicParsing="false" text="%OK" />
-                        <Button cancelButton="true" mnemonicParsing="false" text="%Cancel" />
-                    </buttons>
-                  </ButtonBar>
+                <Button defaultButton="true" mnemonicParsing="false" text="%OK" />
+                  <Button cancelButton="true" mnemonicParsing="false" text="%Cancel" />
                </children>
             </HBox>
          </graphic>

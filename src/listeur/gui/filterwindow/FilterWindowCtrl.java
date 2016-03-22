@@ -37,7 +37,7 @@ public class FilterWindowCtrl extends CustomModalWindowCtrl
         assert queryCode != null : "fx:id=\"queryCode\" was not injected: check your FXML file 'FilterWindow.fxml'.";
         assert typeTarget != null : "fx:id=\"typeTarget\" was not injected: check your FXML file 'FilterWindow.fxml'.";
         
-        typeTarget.setItems( FXCollections.observableArrayList("Folders","Files") );
+        typeTarget.setItems( FXCollections.observableArrayList( resources.getString( "Folders" ), resources.getString( "Files" )) );
         typeTarget.getSelectionModel().clearAndSelect( 0 );
         
         ArrayList<Row> rows=new ArrayList<>();
@@ -54,7 +54,7 @@ public class FilterWindowCtrl extends CustomModalWindowCtrl
         	Node[] elements=r.getElements();
         	
         	if( tableRows==0 )
-        		elements[0]=new Pane();
+        		elements[0]=new Label( resources.getString( "With" ) );
         	
         	tableRows++;
         	gridElements.addRow(tableRows, elements);
@@ -72,7 +72,6 @@ public class FilterWindowCtrl extends CustomModalWindowCtrl
 	protected class Row
 	{
 		protected ChoiceBox<String> operator;
-		protected ChoiceBox<String> haveNotHave;
 		protected ChoiceBox<String> property;
 		protected ChoiceBox<String> propertyOperator;
 		protected Pane valueOperator;
@@ -85,7 +84,7 @@ public class FilterWindowCtrl extends CustomModalWindowCtrl
 			// ==============================
 			
 			operator=new ChoiceBox<String>();
-			operator.setItems( FXCollections.observableArrayList("and","or") );
+			operator.setItems( FXCollections.observableArrayList( resources.getString( "and" ), resources.getString( "or" ) ) );
 			operator.getSelectionModel().selectedIndexProperty().addListener( (val, bef, aft) ->
 			{
 				if( this.isLastRow() )
@@ -97,15 +96,13 @@ public class FilterWindowCtrl extends CustomModalWindowCtrl
 					
 					tableRows++;
 					gridElements.addRow( tableRows, row.getElements() );
+					
+					gridElements.getScene().getWindow().sizeToScene();
 				}
 			});
 			
-			haveNotHave=new ChoiceBox<String>();
-	        haveNotHave.setItems( FXCollections.observableArrayList("have","not have") );
-	        haveNotHave.getSelectionModel().clearAndSelect( 0 );
-	        
 	        property=new ChoiceBox<String>();
-	        property.setItems( FXCollections.observableArrayList("size","name","childs") );
+	        property.setItems( FXCollections.observableArrayList( resources.getString( "size" ), resources.getString( "name"), resources.getString( "childrenNumber" ) ) );
 	        property.getSelectionModel().clearAndSelect( 0 );
 	        
 	        propertyOperator=new ChoiceBox<String>();
@@ -132,7 +129,7 @@ public class FilterWindowCtrl extends CustomModalWindowCtrl
 		
 		public Node[] getElements()
 		{
-			return new Node[]{ operator, haveNotHave, property, propertyOperator, valueOperator };
+			return new Node[]{ operator, property, propertyOperator, valueOperator };
 		}
 	}
 }
