@@ -3,6 +3,7 @@ package listeur.gui.filterwindow;
 import java.net.URL ;
 import java.util.ArrayList ;
 import java.util.ResourceBundle ;
+import java.util.stream.Collectors ;
 
 import javafx.collections.FXCollections ;
 import javafx.fxml.FXML ;
@@ -63,6 +64,44 @@ public class FilterWindowCtrl extends CustomModalWindowCtrl
         queryCode.setText( "SELECT FROM folders WHERE size>0" );
     }
 	
+	protected void compileQuery()
+	{
+		String query=
+		gridElements.getChildren().stream()
+		.map( d ->
+		{
+			if( ChoiceBox.class.isInstance( d ) )
+				return (String)(((ChoiceBox<String>)d).getValue());
+			else if( Spinner.class.isInstance( d ) )
+				return (Integer)(((Spinner)d).getValue())+"";
+			else if( Label.class.isInstance( d ) )
+				return ((Label)d).getText();
+			else if( HBox.class.isInstance( d ) )
+			{
+				HBox t=(HBox)d;
+				
+				return
+				t.getChildren().stream()
+				.map( tc ->
+				{
+					if( ChoiceBox.class.isInstance( tc ) )
+						return (String)(((ChoiceBox<String>)tc).getValue());
+					else if( Spinner.class.isInstance( tc ) )
+						return (Integer)(((Spinner)tc).getValue())+"";
+					else
+						return "<???>";
+				})
+				.collect( Collectors.joining( " " ) );
+			}
+			else
+				return "<???>";
+		})
+		.filter( d -> d!=null )
+		.filter( d -> !d.equals( "" ) )
+		.collect( Collectors.joining( " " ) );
+		
+		queryCode.setText( "SELECT FROM "+typeTarget.getValue()+" "+query );
+	}
 	
 	
 	
@@ -103,11 +142,9 @@ public class FilterWindowCtrl extends CustomModalWindowCtrl
 			
 	        property=new ChoiceBox<String>();
 	        property.setItems( FXCollections.observableArrayList( resources.getString( "size" ), resources.getString( "name"), resources.getString( "childrenNumber" ) ) );
-	        property.getSelectionModel().clearAndSelect( 0 );
 	        
 	        propertyOperator=new ChoiceBox<String>();
 	        propertyOperator.setItems( FXCollections.observableArrayList("=",">",">=","<","<=","!= (or <>)") );
-	        propertyOperator.getSelectionModel().clearAndSelect( 1 );
 	        
 	        // ============================== 
 	        
@@ -118,9 +155,17 @@ public class FilterWindowCtrl extends CustomModalWindowCtrl
 	        
 	        ChoiceBox<String> unitSize=new ChoiceBox<>();
 	        unitSize.setItems( FXCollections.observableArrayList("byte","ko","Mo","Go","To","Po") );
-	        unitSize.getSelectionModel().clearAndSelect( 0 );
 	        
 	        valueOperator.getChildren().addAll( value, unitSize );
+	        
+	        // ============================== 
+	        
+	        value.valueProperty().addListener( (e, b, a) -> { compileQuery(); } );
+	        unitSize.getSelectionModel().selectedIndexProperty().addListener( (e, b, a) -> { compileQuery(); });
+	        
+	        operator.getSelectionModel().selectedIndexProperty().addListener( (e, b, a) -> { compileQuery(); });
+	        property.getSelectionModel().selectedIndexProperty().addListener( (e, b, a) -> { compileQuery(); });
+	        propertyOperator.getSelectionModel().selectedIndexProperty().addListener( (e, b, a) -> { compileQuery(); });
 		}
 		
 		public void setLastRow(boolean value) { this.lastRow=value; }
