@@ -55,7 +55,10 @@ public class FilterWindowCtrl extends CustomModalWindowCtrl
         	Node[] elements=r.getElements();
         	
         	if( tableRows==0 )
-        		elements[0]=new Label( resources.getString( "With" ) );
+        	{
+        		elements[0]=new ChoiceBox<String>();
+        		((ChoiceBox<String>)elements[0]).setItems( FXCollections.observableArrayList( resources.getString( "With" ), "" ) );
+        	}
         	
         	tableRows++;
         	gridElements.addRow(tableRows, elements);
